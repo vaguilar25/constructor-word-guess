@@ -2,10 +2,10 @@ var Word = require("./Word.js");
 
 var wordComplete = new Word();
 //console.log(wordComplete.arrayLetters);
-wordComplete.stringWord("Hola");
+wordComplete.stringWord("Hala");
 wordComplete.returnString();
 
-var guessChar = "l";
+var guessChar = "a";
 wordComplete.guessCharacter(guessChar);
 wordComplete.returnString();
 
