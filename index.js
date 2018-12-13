@@ -2,12 +2,14 @@ var Word = require("./Word.js");
 var inquirer = require("inquirer");
 //Have an array of words
 
-var words = ["test1", "test2", "This is a lot"];
+var words = ["This is a lot", "test2", "test3" ];
 
 //do a function to create a word object and letters objects
 
 var count = 0;
+var countGuess = 0;
 var numWords = words.length;
+
 word(words[count]);
 
 function word(wordToGuess) {
@@ -16,14 +18,14 @@ function word(wordToGuess) {
     if (count < numWords) {
         var newWord = new Word();
         newWord.stringWord(wordToGuess);
-       newWord.returnString();
-        inquireUser( newWord);
+        newWord.returnString();
+        inquireUser(newWord, wordToGuess);
     } else {
         return;
     }
 }
 
-function inquireUser(newWord) {
+function inquireUser(newWord, wordToGuess) {
     //newWord.returnString();
     inquirer.prompt([
         // Here we create a basic text prompt.
@@ -34,18 +36,36 @@ function inquireUser(newWord) {
         }
     ])
         .then(function (response) {
+            count++
             console.log(response.userInput);
-            newWord.guessCharacter(response.userInput);
+            var countCharGuesses = newWord.guessCharacter(response.userInput);
             newWord.returnString();
-//            var returnStringGuess=newWord.returnString();
-  //        newWord.returnString();
-          // console.log("String: " + returnStringGuess);
-    //        if ( returnStringGuess.trim() === words[count] ) {
-      //          count++
-        //        word(words[count]);
+            //            var returnStringGuess=newWord.returnString();
+            //        newWord.returnString();
+            // console.log("String: " + returnStringGuess);
+            console.log("GuessTrueFalse: ", countCharGuesses);
+            countGuess = countGuess + countCharGuesses;
+            countWord = wordToGuess.replace(/\s/g, '');
+            //if ( guessTrueFalse ) {
+            console.log("count word:" + countWord);
+            console.log("countGuess: " + countGuess);
+            console.log("wordToGuess: " + wordToGuess);
 
-          //  } else {
-                inquireUser(newWord);
+            //countGuess++
+            if (countGuess === countWord.length) {
+              
+                console.log("You Win");
+            } else {
+                console.log("Incorrect");
+                inquireUser(newWord, wordToGuess);
+
+            }
+            //        word(words[count]);
+
+            //} else {
+
+
+            //  inquireUser(newWord,wordToGuess);
             //}
 
 
