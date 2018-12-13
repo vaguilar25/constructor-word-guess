@@ -15,18 +15,20 @@ word(words[count]);
 function word(wordToGuess) {
     console.log("Count: " + count);
     console.log(wordToGuess);
+    var guessRemaining = countWordChar(wordToGuess).length + 3;
     if (count < numWords) {
         var newWord = new Word();
         newWord.stringWord(wordToGuess);
         newWord.returnString();
-        inquireUser(newWord, wordToGuess);
+        inquireUser(newWord, wordToGuess,guessRemaining);
     } else {
         return;
     }
 }
 
-function inquireUser(newWord, wordToGuess) {
+function inquireUser(newWord, wordToGuess,guessRemaining) {
     //newWord.returnString();
+    console.log("Initial: " , guessRemaining);
     inquirer.prompt([
         // Here we create a basic text prompt.
         {
@@ -36,7 +38,7 @@ function inquireUser(newWord, wordToGuess) {
         }
     ])
         .then(function (response) {
-            count++
+            
             console.log(response.userInput);
             var countCharGuesses = newWord.guessCharacter(response.userInput);
             newWord.returnString();
@@ -45,7 +47,7 @@ function inquireUser(newWord, wordToGuess) {
             // console.log("String: " + returnStringGuess);
             console.log("GuessTrueFalse: ", countCharGuesses);
             countGuess = countGuess + countCharGuesses;
-            countWord = wordToGuess.replace(/\s/g, '');
+            countWord = countWordChar(wordToGuess);
             //if ( guessTrueFalse ) {
             console.log("count word:" + countWord);
             console.log("countGuess: " + countGuess);
@@ -56,8 +58,24 @@ function inquireUser(newWord, wordToGuess) {
               
                 console.log("You Win");
             } else {
-                console.log("Incorrect");
-                inquireUser(newWord, wordToGuess);
+                if (countCharGuesses === 0 ) {
+                    console.log ("Incorrect!!!");
+                    guessRemaining--
+                    console.log("Guess Remaining: " + guessRemaining);
+                    if (guessRemaining === 0) {
+                        console.log("You Lost");
+                        count++
+                        console.log("Count: " + count);
+                        console.log("Word in the next position: " , words[count]);
+                        word(words[count]);
+                        //return;
+                    }
+                } else {
+                    console.log ("Correct!!!");
+                }
+
+                //console.log("Nothing");
+                inquireUser(newWord, wordToGuess,guessRemaining);
 
             }
             //        word(words[count]);
@@ -72,16 +90,8 @@ function inquireUser(newWord, wordToGuess) {
         });
 }
 
-///var wordComplete = new Word();
-//console.log(wordComplete.arrayLetters);
-///wordComplete.stringWord("Hala");
-///wordComplete.returnString();
+function countWordChar (wordToGuess) {
+    countWord = wordToGuess.replace(/\s/g, '');
+    return countWord
+}
 
-///var guessChar = "a";
-///wordComplete.guessCharacter(guessChar);
-///wordComplete.returnString();
-
-
-//console.log(wordComplete.arrayLetters.string);
-//console.log("Log: " + JSON.stringify(wordComplete.arrayLetters, null, 1) + "\n");
-//console.log(wordToGuess.arrayLetters.string);
