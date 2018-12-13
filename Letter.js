@@ -10,9 +10,9 @@ var Letter = function (string) {
             }
         }
     this.updateGuessed = function (character) {
-       // console.log("this.string" + this.string )
-       // console.log("this.guessed" + this.guessed);
-        //console.log("Character" + character);
+        console.log("this.string" + this.string )
+        console.log("this.guessed" + this.guessed);
+        console.log("Character" + character);
         
         if (character === this.string) {
             this.guessed = true;

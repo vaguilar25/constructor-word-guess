@@ -1,7 +1,7 @@
 {
   "name": "constructor-word-guess",
   "version": "1.0.0",
-  "description": "",
+  "description": "The completed game should be able to receive user input using the inquirer or prompt npm packages. Your solution should have, at minimum, three files:",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/vaguilar25/constructor-word-guess#readme",
   "dependencies": {
-    "inquire": "^0.4.8"
-  }
+    "inquire": "^0.4.8",
+    "inquirer": "^6.2.1"
+  },
+  "devDependencies": {}
 }
