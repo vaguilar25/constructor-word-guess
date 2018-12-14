@@ -9,14 +9,14 @@ var words = ["Led Zeppelin", "Aerosmith", "Green Day", "Pink Floyd" , "Black Sab
 var count = 0;
 var countGuess = 0;
 var numWords = words.length;
-console.log(`
+console.log(`\x1b[32m
 =================================================================
     HANGMAN GAME - TEST YOUR GUESS SKILLS  - GUESS ROCK BANDS - 
 
                ♪ ♬ ♪ ♬ ♪ ♬    ¯\_(ツ)_/¯   ♪ ♬ ♪ ♬ ♪ ♬   
     
 =================================================================
-`);
+\x1b[37m`);
 
 word(words[count]);
 
