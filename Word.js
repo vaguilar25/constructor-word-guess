@@ -1,57 +1,54 @@
 var Letter = require("./Letter.js");
 
-var Word = function() {
+// Word constructor to store word as an array of letter objects
+var Word = function () {
     this.arrayLetters = [];
-    this.stringWord= function(wordToGuess) {
-        //this.arrayLetters.push("hola");
+    //create the object letter
+    this.stringWord = function (wordToGuess) {
 
         var splitWord = wordToGuess.split('');
-        //console.log("Split Word: " + splitWord);
-        for (i=0; i<wordToGuess.length;i++) {
-            
-            this.arrayLetters.push(new Letter(splitWord[i]));
+
+        for (i = 0; i < wordToGuess.length; i++) {
+            this.arrayLetters.push(new Letter(splitWord[i].toLowerCase()));
         }
-
-       
     };
-    this.returnString = function() {
 
-        //var test =  this.arrayLetters['string'];
-        var concatenateWord ="";
-        for (i=0; i<this.arrayLetters.length;i++) {
-            concatenateWord=concatenateWord + " " + this.arrayLetters[i].toString();
-           // console.log(this.arrayLetters[i].toString());
+    //return the format of the word to guess
+    this.returnString = function () {
+
+
+        var concatenateWord = "";
+        for (i = 0; i < this.arrayLetters.length; i++) {
+            concatenateWord = concatenateWord + " " + this.arrayLetters[i].toString();
+
         }
         console.log(concatenateWord);
         return concatenateWord
     }
 
-    this.guessCharacter = function(character) {
-        var countGuesses = 0 ;
-      
-        for (i=0; i<this.arrayLetters.length;i++) {
-           
-             if (this.arrayLetters[i].string === character) {
-                 this.arrayLetters[i].updateGuessed(character);
-                // console.log("letter: ",this.arrayLetters[i].string );
-                 countGuesses++
-               
-             } 
-           
-         }
+    //update the letter key if the character has been guessed
+    this.guessCharacter = function (character) {
+        var countGuesses = 0;
 
-         if (countGuesses>0) {
-             return countGuesses
-         } else {
-             return countGuesses
-         }
+        for (i = 0; i < this.arrayLetters.length; i++) {
+
+            if (this.arrayLetters[i].string.toLowerCase() === character.toLowerCase() && !this.arrayLetters[i].guessed) {
+                this.arrayLetters[i].updateGuessed(character);
+
+                countGuesses++
+
+            }
+
+        }
+
+        return countGuesses;
 
     }
 
-   
+
 
 }
 
-module.exports= Word;
+module.exports = Word;
 
 
