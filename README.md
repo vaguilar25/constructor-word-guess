@@ -23,6 +23,16 @@ The Game is about guess the name of rock bands . Once the band is guessed you wi
     
 ``` 
 
+* NPM Used
+```
+    * Inquirer
+
+    To install:
+
+        npm install inquirer
+        
+``` 
+
 
 ## Built With
 
