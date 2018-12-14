@@ -28,16 +28,16 @@ var Word = function() {
 
     this.guessCharacter = function(character) {
         var countGuesses = 0 ;
-        // console.log("entra" + character);
+      
         for (i=0; i<this.arrayLetters.length;i++) {
-            // console.log(this.arrayLetters[i].string);
+           
              if (this.arrayLetters[i].string === character) {
                  this.arrayLetters[i].updateGuessed(character);
-                 console.log("letter: ",this.arrayLetters[i].string );
+                // console.log("letter: ",this.arrayLetters[i].string );
                  countGuesses++
-                // return true
+               
              } 
-            // console.log(this.arrayLetters[i].toString());
+           
          }
 
          if (countGuesses>0) {

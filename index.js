@@ -11,6 +11,11 @@ var countGuess = 0;
 var numWords = words.length;
 
 word(words[count]);
+console.log(`
+=================================================
+       HANGMAN GAME - TEST YOUR GUESS SKILLS
+=================================================
+`);
 
 // Function to create new Word
 function word(wordToGuess) {
@@ -56,38 +61,44 @@ function inquireUser(newWord, wordToGuess, guessRemaining) {
             //Here we count how many characters are in the word to Guess
             countWord = countWordChar(wordToGuess);
 
+            //Compare if we have guessed all the letters
             if (countGuess === countWord.length) {
-
-
+                //increase the counter that handles the index of the array we are into
                 count++
-                ///      console.log("Count: " + count);
-                //   console.log("count: " + count);
-                //  console.log("numWords: " + numWords );
+
+                //compare if there are words to guess in the array
                 if (count != numWords) {
                     console.log("You Win - Try another word");
-                    //    console.log("Word in the next position: ", words[count]);
+
+                    //Reset the counter of letters guessed for the new word
                     countGuess = 0;
+
+                    //Create another word object
                     word(words[count]);
                 } else {
+                    //If no more words just exit
                     console.log("You Win - No more words");
                 }
 
             } else {
+                // IF NO GUESS - decrease guess remaining .. 
                 if (countCharGuesses === 0) {
                     console.log("Incorrect!!!");
+
                     guessRemaining--
                     console.log("Guess Remaining: " + guessRemaining);
-                    if (guessRemaining === 0) {
 
+                    // If no more characters remainings create new word
+
+                    if (guessRemaining === 0) {
                         count++
-                        // console.log("Count in lost: " + count);
                         if (count != numWords) {
                             console.log("You Lost -- Try next Word");
-                            //  console.log("Word in the next position: ", words[count]);
                             countGuess = 0;
                             word(words[count]);
                             return;
                         } else {
+                            //If no more words - just exit
                             console.log("You Lost -- No more words");
                             return;
                         }
