@@ -24,7 +24,7 @@ The Game is about guess the name of rock bands . Once the band is guessed you wi
 ``` 
 
 * How to Play
-![Demo](./demo.mov)
+![Demo](https://github.com/vaguilar25/constructor-word-guess/blob/master/demo.mov)
 
 ## Built With
 
