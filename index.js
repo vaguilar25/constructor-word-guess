@@ -2,7 +2,7 @@ var Word = require("./Word.js");
 var inquirer = require("inquirer");
 //Have an array of words
 
-var words = ["This is a lot", "test2", "test3" ];
+var words = ["test2", "anotherword", "test4"];
 
 //do a function to create a word object and letters objects
 
@@ -12,25 +12,30 @@ var numWords = words.length;
 
 word(words[count]);
 
+// Function to create new Word
 function word(wordToGuess) {
-    console.log("Count: " + count);
-    console.log(wordToGuess);
+    //Initialice Guesses reamaining
     var guessRemaining = countWordChar(wordToGuess).length + 3;
+
+    // Compare de number of words of the game against the ones already try
     if (count < numWords) {
+
+        //create new word
         var newWord = new Word();
         newWord.stringWord(wordToGuess);
         newWord.returnString();
-        inquireUser(newWord, wordToGuess,guessRemaining);
+
+        //prompt the user for letter guess 
+        inquireUser(newWord, wordToGuess, guessRemaining);
     } else {
         return;
     }
 }
 
-function inquireUser(newWord, wordToGuess,guessRemaining) {
-    //newWord.returnString();
-    console.log("Initial: " , guessRemaining);
+function inquireUser(newWord, wordToGuess, guessRemaining) {
+
     inquirer.prompt([
-        // Here we create a basic text prompt.
+        // Here we create a basic text prompt for the letter.
         {
             type: "input",
             message: "Enter a letter to guess",
@@ -38,59 +43,71 @@ function inquireUser(newWord, wordToGuess,guessRemaining) {
         }
     ])
         .then(function (response) {
-            
-            console.log(response.userInput);
-            var countCharGuesses = newWord.guessCharacter(response.userInput);
-            newWord.returnString();
-            //            var returnStringGuess=newWord.returnString();
-            //        newWord.returnString();
-            // console.log("String: " + returnStringGuess);
-            console.log("GuessTrueFalse: ", countCharGuesses);
-            countGuess = countGuess + countCharGuesses;
-            countWord = countWordChar(wordToGuess);
-            //if ( guessTrueFalse ) {
-            console.log("count word:" + countWord);
-            console.log("countGuess: " + countGuess);
-            console.log("wordToGuess: " + wordToGuess);
 
-            //countGuess++
+            //Set true or false is the letter is guess
+            var countCharGuesses = newWord.guessCharacter(response.userInput);
+
+            //Print what is guess so far
+            newWord.returnString();
+
+            //Count how many guess
+            countGuess = countGuess + countCharGuesses;
+
+            //Here we count how many characters are in the word to Guess
+            countWord = countWordChar(wordToGuess);
+
             if (countGuess === countWord.length) {
-              
-                console.log("You Win");
+
+
+                count++
+                ///      console.log("Count: " + count);
+                //   console.log("count: " + count);
+                //  console.log("numWords: " + numWords );
+                if (count != numWords) {
+                    console.log("You Win - Try another word");
+                    //    console.log("Word in the next position: ", words[count]);
+                    countGuess = 0;
+                    word(words[count]);
+                } else {
+                    console.log("You Win - No more words");
+                }
+
             } else {
-                if (countCharGuesses === 0 ) {
-                    console.log ("Incorrect!!!");
+                if (countCharGuesses === 0) {
+                    console.log("Incorrect!!!");
                     guessRemaining--
                     console.log("Guess Remaining: " + guessRemaining);
                     if (guessRemaining === 0) {
-                        console.log("You Lost");
+
                         count++
-                        console.log("Count: " + count);
-                        console.log("Word in the next position: " , words[count]);
-                        word(words[count]);
-                        //return;
+                        // console.log("Count in lost: " + count);
+                        if (count != numWords) {
+                            console.log("You Lost -- Try next Word");
+                            //  console.log("Word in the next position: ", words[count]);
+                            countGuess = 0;
+                            word(words[count]);
+                            return;
+                        } else {
+                            console.log("You Lost -- No more words");
+                            return;
+                        }
+
                     }
                 } else {
-                    console.log ("Correct!!!");
+                    console.log("Correct!!!");
+
                 }
 
-                //console.log("Nothing");
-                inquireUser(newWord, wordToGuess,guessRemaining);
+                inquireUser(newWord, words[count], guessRemaining);
 
             }
-            //        word(words[count]);
 
-            //} else {
-
-
-            //  inquireUser(newWord,wordToGuess);
-            //}
 
 
         });
 }
 
-function countWordChar (wordToGuess) {
+function countWordChar(wordToGuess) {
     countWord = wordToGuess.replace(/\s/g, '');
     return countWord
 }

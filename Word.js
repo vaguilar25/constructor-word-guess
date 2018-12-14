@@ -6,7 +6,7 @@ var Word = function() {
         //this.arrayLetters.push("hola");
 
         var splitWord = wordToGuess.split('');
-        console.log("Split Word: " + splitWord);
+        //console.log("Split Word: " + splitWord);
         for (i=0; i<wordToGuess.length;i++) {
             
             this.arrayLetters.push(new Letter(splitWord[i]));
@@ -22,7 +22,7 @@ var Word = function() {
             concatenateWord=concatenateWord + " " + this.arrayLetters[i].toString();
            // console.log(this.arrayLetters[i].toString());
         }
-        console.log("concatenateWord: ", concatenateWord);
+        console.log(concatenateWord);
         return concatenateWord
     }
 
